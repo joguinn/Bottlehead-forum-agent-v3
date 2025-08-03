@@ -47,8 +47,8 @@ def ask_forum_agent(query, product=None):
     if not forum_agent:
         return "⚠️ Forum agent is not available."
 
-    if product:
-        retriever = forum_agent.retriever
-        retriever.search_kwargs["filter"] = lambda doc: doc.metadata.get("product", "").lower() == product.lower()
+   if product:
+    retriever = forum_agent.retriever
+    retriever.search_kwargs["filter"] = lambda doc: doc.get("metadata", {}).get("product", "").lower() == product.lower()
 
     return forum_agent.run(query)
